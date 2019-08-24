@@ -8,6 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
 import { TipoEmpaquesComponent } from './components/tipo-empaques/tipo-empaques.component';
 import { HomeComponent } from './components/home/home.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './components/home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
