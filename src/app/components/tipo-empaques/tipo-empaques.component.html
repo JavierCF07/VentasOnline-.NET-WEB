@@ -1,3 +1,26 @@
-<p>
-  tipo-empaques works!
-</p>
+<div class="card border-primary mb-3">
+  <div class="card-header">Tipo de Empaque</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de Tipo de Empaque</h5>
+    <div class="my-2 text-left"></div>
+    <button class="btn btn-primary" type="button" routerLink="['/home']">
+      Crear Tipo de Empaque
+    </button>
+    <div *ngIf="tipoEmpaque?.length == 0" class="alert alert.info">
+      No hay registros en la base de datos
+    </div>
+    
+    <table class="table table-bordered table-striped" style="margin-top: 50px">
+      <thead>
+        <tr>
+          <th>Descripcion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let TipoEmpaque of tipoEmpaque">
+          <td>{{TipoEmpaque.descripcion}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
