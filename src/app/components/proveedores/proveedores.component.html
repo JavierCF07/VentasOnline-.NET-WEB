@@ -1,10 +1,10 @@
 <div class="card border-primary mb-3">
-    <div class="card-header">Categorias</div>
+    <div class="card-header">Proveedores</div>
     <div class="card-body text-primary">
-        <h5 class="card-title">Listado de categorias</h5>
+        <h5 class="card-title">Listado de proveedores</h5>
         <div class="my-2 text-left"></div>
         <button class="btn btn-primary" type="button" routerLink="['/home']">
-        Crear Categoria
+        Crear Proveedores
       </button>
         <div *ngIf="proveedores?.length == 0" class="alert alert.info">
             No hay registros en la base de datos
@@ -22,14 +22,13 @@
             </thead>
             <tbody>
                 <tr *ngFor="let Proveedores of proveedores">
-                    <td>{Proveedores.nit}}</td>
-                    <td>{Proveedores.razonSocial}}</td>
-                    <td>{Proveedores.direccion}}</td>
-                    <td>{Proveedores.paginaWeb}}</td>
-                    <td>{Proveedores.contactoPrincipal}}</td>
+                    <td>{{Proveedores.nit}}</td>
+                    <td>{{Proveedores.razonSocial}}</td>
+                    <td>{{Proveedores.direccion}}</td>
+                    <td>{{Proveedores.paginaWeb}}</td>
+                    <td>{{Proveedores.contactoPrincipal}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-</div>
 </div>

@@ -14,6 +14,7 @@ export class CategoriaService {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token}`});
     return this._HttpClient.get(`${this.API_URL}/${url}`, {headers});
   }
+  
   getCategorias(){
     return this.getData('Categoria');
   }
