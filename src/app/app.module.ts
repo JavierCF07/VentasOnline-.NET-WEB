@@ -9,6 +9,8 @@ import { CategoriasComponent } from './components/categorias/categorias.componen
 import { TipoEmpaquesComponent } from './components/tipo-empaques/tipo-empaques.component';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { ClientesComponent } from './components/clientes/clientes.component';
+import { ProveedoresComponent } from './components/proveedores/proveedores.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
     FooterComponent,
     CategoriasComponent,
     TipoEmpaquesComponent,
-    HomeComponent
+    HomeComponent,
+    ClientesComponent,
+    ProveedoresComponent
   ],
   imports: [
     BrowserModule,

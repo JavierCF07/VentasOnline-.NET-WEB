@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriaService {
+export class ProveedoresService {
   private API_URL = 'https://localhost:44384/api/v1';
   private token = ''
   constructor(private _HttpClient: HttpClient) { }
@@ -14,7 +14,8 @@ export class CategoriaService {
     const headers = new HttpHeaders({'Authorization': `Bearer ${this.token}`});
     return this._HttpClient.get(`${this.API_URL}/${url}`, {headers});
   }
-  getCategorias(){
-    return this.getData('Categoria');
+
+  getProveedores(){
+    return this.getData('Proveedores'); 
   }
 }
