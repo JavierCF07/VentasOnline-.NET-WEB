@@ -18,6 +18,5 @@ export class AuthService {
       'Content-Type':'application/json'
     });
     return this._httpClient.post(urlEndpoint,usuario,{headers:httpHeaders});
-    return null;
   }
 }

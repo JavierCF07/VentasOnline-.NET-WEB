@@ -5,8 +5,10 @@ import { CategoriasComponent } from './components/categorias/categorias.componen
 import { TipoEmpaquesComponent } from './components/tipo-empaques/tipo-empaques.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
+  {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent},
   {path: 'categorias', component: CategoriasComponent},
   {path: 'tipoEmpaque', component: TipoEmpaquesComponent},
