@@ -19,4 +19,23 @@ export class AuthService {
     });
     return this._httpClient.post(urlEndpoint,usuario,{headers:httpHeaders});
   }
+
+  saveUser(token: string){
+    this._usuario = new Usuario();
+    const payload = this.GetDataToken(token);
+    this._usuario.email = payload.unique_name;
+    sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
+  }
+
+  saveToken(token:string){
+    this._token = token;
+    sessionStorage.setItem('token', token);
+  }
+
+  GetDataToken(token: string){
+    if(token != null){
+      return JSON.parse(atob(token.split('.')[1]));
+    }
+    return null;
+  }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Usuario } from '../services/usuario';
+import swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-login',
@@ -22,7 +24,9 @@ export class LoginComponent implements OnInit {
     console.log(this.usuario);
     this.auth.login(this.usuario).subscribe(
       response => {
-        console.log(response);
+        this.auth.saveToken(response.token);
+        this.auth.saveUser(response.token);
+        swal.fire('Login', 'Bienvenido', 'success');
       }, error => {
         console.log(error);
       }
