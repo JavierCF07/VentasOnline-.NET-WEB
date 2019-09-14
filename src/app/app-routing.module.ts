@@ -6,10 +6,12 @@ import { TipoEmpaquesComponent } from './components/tipo-empaques/tipo-empaques.
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './components/login/guards/authguard.guard';
+
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'categorias', component: CategoriasComponent},
   {path: 'tipoEmpaque', component: TipoEmpaquesComponent},
   {path: 'clientes', component: ClientesComponent},

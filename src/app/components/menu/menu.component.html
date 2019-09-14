@@ -5,7 +5,7 @@
         </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+        <ul *ngIf="authService.isAuthenticated()" class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Componentes
@@ -21,9 +21,7 @@
         <ul class="navbar-nav navbar-right">
             <li *ngIf="!authService.isAuthenticated()"><a routerLink='login' class="btn btn-outline-primary">Sign In</a></li>
             <li *ngIf="authService.isAuthenticated()" class="dropdown">
-                <a class="btn btn-outline-primary dropdown-toggle" role="button" 
-                id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" 
-                aria-expanded="false" href="#">Javier Cifuentes</a>
+                <a class="btn btn-outline-primary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Javier Cifuentes</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <button class="dropdown-item" type="submit" (click)='logout()'>Sign Out</button>
                 </div>
