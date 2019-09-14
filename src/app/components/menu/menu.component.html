@@ -11,7 +11,6 @@
                 Componentes
               </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" routerLink="login">Login</a>
                     <a class="dropdown-item" routerLink="categorias">Categorias</a>
                     <a class="dropdown-item" routerLink="tipoEmpaque">Tipo de Empaque</a>
                     <a class="dropdown-item" routerLink="clientes">Clientes</a>
@@ -19,9 +18,16 @@
                 </div>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <ul class="navbar-nav navbar-right">
+            <li *ngIf="!authService.isAuthenticated()"><a routerLink='login' class="btn btn-outline-primary">Sign In</a></li>
+            <li *ngIf="authService.isAuthenticated()" class="dropdown">
+                <a class="btn btn-outline-primary dropdown-toggle" role="button" 
+                id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" 
+                aria-expanded="false" href="#">Javier Cifuentes</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <button class="dropdown-item" type="submit" (click)='logout()'>Sign Out</button>
+                </div>
+            </li>
+        </ul>
     </div>
 </nav>
