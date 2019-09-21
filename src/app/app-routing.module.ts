@@ -7,15 +7,17 @@ import { ClientesComponent } from './components/clientes/clientes.component';
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './components/login/guards/authguard.guard';
+import { ProductosComponent } from './components/productos/productos.component';
 
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
-  {path: 'categorias', component: CategoriasComponent},
-  {path: 'tipoEmpaque', component: TipoEmpaquesComponent},
-  {path: 'clientes', component: ClientesComponent},
-  {path: 'proveedores', component: ProveedoresComponent},
+  {path: 'categorias', component: CategoriasComponent, canActivate: [AuthGuard]},
+  {path: 'tipoEmpaque', component: TipoEmpaquesComponent, canActivate: [AuthGuard]},
+  {path: 'clientes', component: ClientesComponent, canActivate: [AuthGuard]},
+  {path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard]},
+  {path: 'productos', component: ProductosComponent, canActivate: [AuthGuard]},
   {path: '**', pathMatch: 'full', redirectTo: 'home'}
 ];
 

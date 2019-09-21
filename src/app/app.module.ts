@@ -13,6 +13,9 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
+import { TokenInterceptor } from "./components/login/interceptors/token.interceptor";
+import { ProductosComponent } from './components/productos/productos.component';
+import { AuthInterceptor } from './components/login/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { FormsModule } from "@angular/forms";
     HomeComponent,
     ClientesComponent,
     ProveedoresComponent,
-    LoginComponent
+    LoginComponent,
+    ProductosComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +36,10 @@ import { FormsModule } from "@angular/forms";
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,8 +11,8 @@ export class ProveedoresService {
   constructor(private _HttpClient: HttpClient) { }
 
   getData(url: string){
-    const headers = new HttpHeaders({'Authorization': `Bearer ${this.token}`});
-    return this._HttpClient.get(`${this.API_URL}/${url}`, {headers});
+    //const headers = new HttpHeaders({'Authorization': `Bearer ${this.token}`});
+    return this._HttpClient.get(`${this.API_URL}/${url}` /*{headers}*/);
   }
 
   getProveedores(){
