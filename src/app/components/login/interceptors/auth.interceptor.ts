@@ -5,6 +5,7 @@ import { catchError } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { AuthService } from '../../services/auth.service';
 import swal from "sweetalert2";
+
 export class AuthInterceptor implements HttpInterceptor{
     constructor(private autService: AuthService, private router: Router){
 
@@ -19,7 +20,7 @@ export class AuthInterceptor implements HttpInterceptor{
                     }
                     this.router.navigate(['/login']);
                 }
-                else if(e.status == 403){
+                if(e.status == 403){
                     swal.fire('Acceso denegado', 'No tiene permisos a estos recursos','warning');
                     this.router.navigate(['/home']);
                 }

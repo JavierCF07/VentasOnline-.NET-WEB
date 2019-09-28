@@ -8,6 +8,7 @@ import { ProveedoresComponent } from './components/proveedores/proveedores.compo
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './components/login/guards/authguard.guard';
 import { ProductosComponent } from './components/productos/productos.component';
+import { ProductoFormComponent } from './components/productos/producto-form/producto-form.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'clientes', component: ClientesComponent, canActivate: [AuthGuard]},
   {path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard]},
   {path: 'productos', component: ProductosComponent, canActivate: [AuthGuard]},
+  {path: 'productoForm', component: ProductoFormComponent, canActivate: [AuthGuard]},
   {path: '**', pathMatch: 'full', redirectTo: 'home'}
 ];
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Categoria } from '../categorias/categoria';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ export class CategoriaService {
 
   getData(url: string){
     //const headers = new HttpHeaders({'Authorization': `Bearer ${this.token}`});
-    return this._HttpClient.get(`${this.API_URL}/${url}` /*{headers}*/);
+    return this._HttpClient.get<Categoria[]>(`${this.API_URL}/${url}` /*{headers}*/);
   }
   
   getCategorias(){
