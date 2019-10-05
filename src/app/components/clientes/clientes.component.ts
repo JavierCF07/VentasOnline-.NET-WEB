@@ -9,8 +9,8 @@ import { ClientesService } from '../services/clientes.service';
 export class ClientesComponent implements OnInit {
   clientes: any[] = [];
 
-  constructor(private _ClientesService: ClientesService) {
-    this._ClientesService.getClientes().subscribe((data: any)=>{
+  constructor(private clientesService: ClientesService) {
+    this.clientesService.getClientes().subscribe((data: any) => {
       this.clientes = data;
     });
    }

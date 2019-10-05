@@ -10,7 +10,7 @@ export class FooterComponent implements OnInit {
   compania: string;
   constructor() {
     this.anio = new Date().getFullYear();
-    this.compania = 'VentasOnline V 1.0'
+    this.compania = 'VentasOnline V 1.0';
    }
 
   ngOnInit() {

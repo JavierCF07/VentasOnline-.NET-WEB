@@ -8,15 +8,15 @@ import { Categoria } from '../categorias/categoria';
 })
 export class CategoriaService {
   private API_URL = 'https://localhost:44384/api/v1';
-  private token = ''
-  constructor(private _HttpClient: HttpClient) { }
+  private token;
+  constructor(private httpClient: HttpClient) { }
 
-  getData(url: string){
-    //const headers = new HttpHeaders({'Authorization': `Bearer ${this.token}`});
-    return this._HttpClient.get<Categoria[]>(`${this.API_URL}/${url}` /*{headers}*/);
+  getData(url: string) {
+    /*const headers = new HttpHeaders({'Authorization': `Bearer ${this.token}`});*/
+    return this.httpClient.get<Categoria[]>(`${this.API_URL}/${url}` /*{headers}*/);
   }
-  
-  getCategorias(){
+
+  getCategorias() {
     return this.getData('Categoria');
   }
 }

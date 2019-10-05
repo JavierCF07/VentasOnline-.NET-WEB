@@ -1,6 +1,8 @@
-<div class="card-bg-dark text-while">
-    <div class="card-header">{{titulo}}</div>
-    <div class="card-body">
+<div class="card-bg-dark text-white">
+    <div class="card-header" style="background: #1b4f72;">{{titulo}}
+        <button class="boton" type="button" [routerLink]="['/productos']">Regresar</button>
+    </div>
+    <div class="card-body text-primary" style="background: burlywood">
         <form #productoForm="ngForm">
             <div class="form-group row">
                 <label for="descripcion" class="col-form-label col-sm-2">Descripcion</label>
@@ -12,25 +14,25 @@
                 <label for="categoria" class="col-form-label col-sm-2">Categoria</label>
                 <div class="col-sm-6">
                     <select name="categoria" class="form-control" [(ngModel)]="producto.categoria" class="select-ancho">
-                      <option [ngValue]="undefined">Seleccionar una categoria</option>
+                      <option [ngValue]="undefined">-----Seleccionar una categoria-----</option>
                       <option *ngFor="let categoria of categorias" [ngValue]="categorias">
                         {{categoria.descripcion}}
                       </option>
                     </select>
                 </div>
                 <div class="form-group row">
-                    <label for="tipoEmpaque" class="col-form-label col-sm-2">Tipo de Empaque</label>
+                    <label for="tipoEmpaque" class="col-form-label col-sm-6">Tipo de Empaque</label>
                     <div class="col-sm-6">
                         <select name="tipoEmpaque" class="form-control" [(ngModel)]="producto.tipoEmpaque" class="select-ancho">
-                      <option [ngValue]="undefined">Seleccionar un tipo de empaque</option>
-                      <option *ngFor="let tipo of tipoEmpaque" [ngValue]="tipoEmpaque">
+                      <option [ngValue]="undefined">-----Seleccionar un tipo de empaque-----</option>
+                      <option *ngFor="let tipo of tipoEmpaques" [ngValue]="tipoEmpaque">
                         {{tipo.descripcion}}
                       </option>
                     </select>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <button class="btn btn-primary" role="button">Crear</button>
+                <div class="form-group row" class="col-form-label col-sm-8">
+                    <button class="btn btn-primary" role="button" (click)="create()">Crear</button>
                 </div>
             </div>
         </form>

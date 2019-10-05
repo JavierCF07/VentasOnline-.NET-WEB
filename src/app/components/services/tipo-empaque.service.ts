@@ -7,16 +7,15 @@ import { TipoEmpaque } from '../tipo-empaques/tipo-empaque';
 })
 export class TipoEmpaqueService {
   private API_URL = 'https://localhost:44384/api/v1';
-  private token = ''
+  private token;
 
-  constructor(private _HttpClient : HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getData(url: string)
-  {
-    //const headers = new HttpHeaders({'Authorization': `Bearer ${this.token}`});
-    return this._HttpClient.get<TipoEmpaque[]>(`${this.API_URL}/${url}`/*{headers}*/);
+  getData(url: string) {
+    /*const headers = new HttpHeaders({'Authorization': `Bearer ${this.token}`});*/
+    return this.httpClient.get<TipoEmpaque[]>(`${this.API_URL}/${url}`/*{headers}*/);
   }
-  getTipoEmpaque(){
-    return this.getData('TipoEmpaque')
+  getTipoEmpaque() {
+    return this.getData('TipoEmpaque');
   }
 }

@@ -15,10 +15,10 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
   }
 
-  logout():void{
-    const username = this.authService.usuario.email;
+  logout(): void {
+    const username = this.authService.Usuario.email;
     this.authService.logout();
-    Swal.fire('Logout',`Hola ${username}, has cerrado sesión con éxito!`,'success');
+    Swal.fire('Logout' , `Hola ${username}, has cerrado sesión con éxito!`, 'success');
     this.router.navigate(['/login']);
   }
 }

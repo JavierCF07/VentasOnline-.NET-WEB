@@ -9,8 +9,8 @@ import { ProveedoresService } from '../services/proveedores.service';
 export class ProveedoresComponent implements OnInit {
   proveedores: any[] = [];
 
-  constructor(private _proveedoresService: ProveedoresService) {
-    this._proveedoresService.getProveedores().subscribe((data:  any) => {
+  constructor(private proveedoresService: ProveedoresService) {
+    this.proveedoresService.getProveedores().subscribe((data: any) => {
       this.proveedores = data;
     });
    }
