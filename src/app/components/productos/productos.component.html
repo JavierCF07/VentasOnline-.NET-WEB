@@ -20,6 +20,8 @@
                     <th>Categoria</th>
                     <th>Tipo de Empaque</th>
                     <th>Precio</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,6 +31,8 @@
                     <td>{{producto.categoria.descripcion}}</td>
                     <td>{{producto.tipoEmpaque.descripcion}}</td>
                     <td>{{producto.precioUnitario}}</td>
+                    <td><button type="button" name="editar" class="btn btn-primary btn-sm">Editar</button></td>
+                    <td><button (click)="delete(producto)" type="button" name="eliminar" class="btn btn-danger btn-sm">Eliminar</button></td>
                 </tr>
             </tbody>
         </table>

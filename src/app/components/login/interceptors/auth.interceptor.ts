@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import swal from 'sweetalert2';
 
+@Injectable()
 export class AuthInterceptor implements HttpInterceptor {
     constructor(private autService: AuthService, private router: Router) {
 

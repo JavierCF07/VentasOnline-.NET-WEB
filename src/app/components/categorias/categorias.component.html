@@ -13,11 +13,13 @@
         <table class="table table-bordered table-striped" style="margin-top: 50px">
             <thead>
                 <tr>
+                    <th>Codigo</th>
                     <th>Descripcion</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let Categoria of categorias">
+                    <td>{{Categoria.codigoCategoria}}</td>
                     <td>{{Categoria.descripcion}}</td>
                 </tr>
             </tbody>
