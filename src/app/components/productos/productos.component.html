@@ -1,3 +1,5 @@
+<app-producto-form *ngIf="productoSeleccionado" [producto]="productoSeleccionado" [id]="productoSeleccionado.codigoProducto"></app-producto-form>
+
 <div class="card border-primary mb-3">
     <div class="card-header">Productos
         <button class="boton" type="button" routerLink='home'>Regresar</button>
@@ -5,7 +7,7 @@
     <div class="card-body text-primary">
         <h5 class="card-title">Listado de productos</h5>
         <div class="my-2 text-left"></div>
-        <button class="btn btn-primary" [routerLink]="['/productoForm']">
+        <button class="btn btn-primary" [routerLink]="['/productoForm']">   
             Crear Producto
         </button>
         <div *ngIf="productos?.length == 0" class="alert alert.info">
@@ -31,11 +33,10 @@
                     <td>{{producto.categoria.descripcion}}</td>
                     <td>{{producto.tipoEmpaque.descripcion}}</td>
                     <td>{{producto.precioUnitario}}</td>
-                    <td><button type="button" name="editar" class="btn btn-primary btn-sm">Editar</button></td>
+                    <td><button (click)="abrirModal(producto)" type="button" name="editar" class="btn btn-primary btn-sm">Editar</button></td>
                     <td><button (click)="delete(producto)" type="button" name="eliminar" class="btn btn-danger btn-sm">Eliminar</button></td>
                 </tr>
             </tbody>
         </table>
-
     </div>
 </div>

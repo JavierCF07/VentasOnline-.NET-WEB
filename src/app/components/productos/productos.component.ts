@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../services/producto.service';
 import { Producto } from './producto';
 import Swal from 'sweetalert2';
+import { ModalProductoService } from '../services/modal/modal-producto.service';
 
 @Component({
   selector: 'app-productos',
@@ -10,8 +11,8 @@ import Swal from 'sweetalert2';
 })
 export class ProductosComponent implements OnInit {
   productos: any[];
-
-  constructor(private productoService: ProductoService) {
+  productoSeleccionado: Producto;
+  constructor(private productoService: ProductoService, private ModalProductService: ModalProductoService) {
     this.productoService.getProductos().subscribe((data: any) => {
       this.productos = data;
     });
@@ -41,5 +42,10 @@ export class ProductosComponent implements OnInit {
           }
         );
       });
+    }
+
+    abrirModal(producto: Producto) {
+      this.productoSeleccionado = producto;
+      this.ModalProductService.abrirModal();
     }
   }

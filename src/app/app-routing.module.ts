@@ -20,6 +20,7 @@ const routes: Routes = [
   {path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard]},
   {path: 'productos', component: ProductosComponent, canActivate: [AuthGuard]},
   {path: 'productoForm', component: ProductoFormComponent, canActivate: [AuthGuard]},
+  {path: 'productoForm/:id', component: ProductoFormComponent, canActivate: [AuthGuard]},
   {path: '**', pathMatch: 'full', redirectTo: 'home'}
 ];
 

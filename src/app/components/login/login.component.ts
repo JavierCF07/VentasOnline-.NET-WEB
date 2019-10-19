@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
 
 
   login(): void {
-    console.log(this.usuario);
     this.auth.login(this.usuario).subscribe(
       response => {
         this.auth.saveToken(response.token);
