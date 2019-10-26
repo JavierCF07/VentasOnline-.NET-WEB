@@ -16,6 +16,7 @@ import { TokenInterceptor } from './components/login/interceptors/token.intercep
 import { ProductosComponent } from './components/productos/productos.component';
 import { AuthInterceptor } from './components/login/interceptors/auth.interceptor';
 import { ProductoFormComponent } from './components/productos/producto-form/producto-form.component';
+import { CategoriaFormComponent } from './components/categorias/categoria-form/categoria-form.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ProductoFormComponent } from './components/productos/producto-form/prod
     ProveedoresComponent,
     LoginComponent,
     ProductosComponent,
-    ProductoFormComponent
+    ProductoFormComponent,
+    CategoriaFormComponent
   ],
   imports: [
     BrowserModule,

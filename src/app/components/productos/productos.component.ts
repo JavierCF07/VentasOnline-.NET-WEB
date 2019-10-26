@@ -3,6 +3,7 @@ import { ProductoService } from '../services/producto.service';
 import { Producto } from './producto';
 import Swal from 'sweetalert2';
 import { ModalProductoService } from '../services/modal/modal-producto.service';
+import { ProductoCreacionDTO } from './producto-creacion-dto';
 
 @Component({
   selector: 'app-productos',
@@ -11,7 +12,9 @@ import { ModalProductoService } from '../services/modal/modal-producto.service';
 })
 export class ProductosComponent implements OnInit {
   productos: any[];
-  productoSeleccionado: Producto;
+  productoSeleccionado: ProductoCreacionDTO;
+  id: number;
+
   constructor(private productoService: ProductoService, private ModalProductService: ModalProductoService) {
     this.productoService.getProductos().subscribe((data: any) => {
       this.productos = data;
@@ -34,7 +37,8 @@ export class ProductosComponent implements OnInit {
       cancelButtonText: 'Cancelar',
       confirmButtonClass: 'btn btn-danger',
       buttonsStyling: false,
-      reverseButtons: true}).then((result) => {
+      reverseButtons: true
+    }).then((result) => {
         this.productoService.delete(producto.codigoProducto).subscribe(
           () => {
             this.productos = this.productos.filter(prod => prod !== producto);
@@ -44,8 +48,16 @@ export class ProductosComponent implements OnInit {
       });
     }
 
-    abrirModal(producto: Producto) {
-      this.productoSeleccionado = producto;
+    abrirModal(producto?: Producto) {
+      if (producto) {
+        this.productoSeleccionado = new ProductoCreacionDTO();
+        this.productoSeleccionado.codigoCategoria = producto.categoria.codigoCategoria;
+        this.productoSeleccionado.codigoEmpaque = producto.tipoEmpaque.codigoEmpaque;
+        this.productoSeleccionado.descripcion = producto.descripcion;
+        this.id = producto.codigoProducto;
+      } else {
+        this.id = null;
+      }
       this.ModalProductService.abrirModal();
     }
   }

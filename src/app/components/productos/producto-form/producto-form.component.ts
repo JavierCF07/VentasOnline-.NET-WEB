@@ -17,12 +17,12 @@ import { ModalProductoService } from '../../services/modal/modal-producto.servic
 })
 export class ProductoFormComponent implements OnInit {
   titulo: string;
+  mensaje: string;
   @Input() producto: ProductoCreacionDTO;
   @Input() id: number;
   actualizar: true;
   categorias: Categoria[];
   tipoEmpaques: TipoEmpaque[];
-  productoDTO: ProductoCreacionDTO = new ProductoCreacionDTO();
 
   constructor(
     private categoriaService: CategoriaService,
@@ -35,19 +35,24 @@ export class ProductoFormComponent implements OnInit {
   ngOnInit() {
     this.categoriaService.getCategorias().subscribe(categoria => this.categorias = categoria);
     this.tipoEmpaqueService.getTipoEmpaque().subscribe(tipoEmpaque => this.tipoEmpaques = tipoEmpaque);
+    if (!this.id) {
+      this.producto = new ProductoCreacionDTO();
+    }
   }
 
   create(): void {
-    this.productoService.create(this.productoDTO).subscribe(
+    this.productoService.create(this.producto).subscribe(
       producto => {
         this.router.navigate(['/productos']);
-        Swal.fire('Nuevo producto', `El producto ${this.productoDTO.descripcion} ha sido creado con 'éxito`,
+        Swal.fire('Nuevo producto', `El producto ${this.producto.descripcion} ha sido creado con éxito`,
         'success');
         this.modalProductoService.cerrarModal();
-        this.producto = null;
       },
       error => {
-        Swal.fire('Nuevo producto', `Error code ${error.status}`, 'error');
+        this.mensaje = 'The descripcion field is required';
+        if (this.mensaje) {
+          Swal.fire('Nuevo producto', 'No puede dejar los campos vacios', 'error');
+        }
       }
     );
   }
@@ -66,6 +71,6 @@ export class ProductoFormComponent implements OnInit {
 
   cerrarModal(): void {
     this.modalProductoService.cerrarModal();
-    this.producto = null;
+    console.log(this.id);
   }
 }

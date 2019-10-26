@@ -1,4 +1,5 @@
-<app-producto-form *ngIf="productoSeleccionado" [producto]="productoSeleccionado" [id]="productoSeleccionado.codigoProducto"></app-producto-form>
+<app-producto-form *ngIf="!id && ModalProductService.modal"></app-producto-form>
+<app-producto-form *ngIf="id && ModalProductService.modal" [producto]="productoSeleccionado" [id]="id"></app-producto-form>
 
 <div class="card border-primary mb-3">
     <div class="card-header">Productos
@@ -7,7 +8,7 @@
     <div class="card-body text-primary">
         <h5 class="card-title">Listado de productos</h5>
         <div class="my-2 text-left"></div>
-        <button class="btn btn-primary" [routerLink]="['/productoForm']">   
+        <button class="btn btn-primary" type="button" (click)="abrirModal()">   
             Crear Producto
         </button>
         <div *ngIf="productos?.length == 0" class="alert alert.info">

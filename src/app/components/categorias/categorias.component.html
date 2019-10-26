@@ -1,9 +1,11 @@
 <div class="card border-primary mb-3">
-    <div class="card-header">Categorias</div>
+    <div class="card-header">Categorias
+        <button class="boton" type="button" routerLink='home'>Regresar</button>
+    </div>
     <div class="card-body text-primary">
         <h5 class="card-title">Listado de categorias</h5>
         <div class="my-2 text-left"></div>
-        <button class="btn btn-primary" type="button" routerLink="['/home']">
+        <button class="btn btn-primary" type="button" (click)="abrirModal()">
       Crear Categoria
     </button>
         <div *ngIf="categorias?.length == 0" class="alert alert.info">
@@ -15,12 +17,15 @@
                 <tr>
                     <th>Codigo</th>
                     <th>Descripcion</th>
+                    <td>Editar</td>
+                    <td>Eliminar</td>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let Categoria of categorias">
                     <td>{{Categoria.codigoCategoria}}</td>
                     <td>{{Categoria.descripcion}}</td>
+                    <td><button (click)="abrirModal"></button></td>
                 </tr>
             </tbody>
         </table>
