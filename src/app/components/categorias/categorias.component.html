@@ -1,3 +1,7 @@
+<!-- <app-categoria-form *ngIf="!id && ModalCategoriaService.modal"></app-categoria-form>
+<app-categoria-form *ngIf="id && ModalCategoriaService.modal" [categoria]="categoriaSeleccionada" [id]="id"></app-categoria-form> -->
+<app-categoria-form [categoria]="categoriaSeleccionada"></app-categoria-form>
+
 <div class="card border-primary mb-3">
     <div class="card-header">Categorias
         <button class="boton" type="button" routerLink='home'>Regresar</button>
@@ -22,12 +26,30 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let Categoria of categorias">
-                    <td>{{Categoria.codigoCategoria}}</td>
-                    <td>{{Categoria.descripcion}}</td>
-                    <td><button (click)="abrirModal"></button></td>
+                <tr *ngFor="let categoria of categorias">
+                    <td>{{categoria.codigoCategoria}}</td>
+                    <td>{{categoria.descripcion}}</td>
+                    <td><button (click)="abrirModal(categoria)" type="button" name="editar" class="btn btn-primary btn-sm">Editar</button></td>
+                    <td><button (click)="delete(categoria)" type="button" name="eliminar" class="btn btn-danger btn-sm">Eliminar</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <nav id="pagination" aria-label="...">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item" aria-current="page">
+                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
 </div>

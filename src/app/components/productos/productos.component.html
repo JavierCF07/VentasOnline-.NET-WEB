@@ -1,5 +1,6 @@
-<app-producto-form *ngIf="!id && ModalProductService.modal"></app-producto-form>
-<app-producto-form *ngIf="id && ModalProductService.modal" [producto]="productoSeleccionado" [id]="id"></app-producto-form>
+<!-- <app-producto-form *ngIf="!producto && ModalProductService.modal"></app-producto-form>
+<app-producto-form *ngIf="producto && ModalProductService.modal" [producto]="productoSeleccionado" [id]="id"></app-producto-form> -->
+<app-producto-form [producto]="productoSeleccionado"></app-producto-form>
 
 <div class="card border-primary mb-3">
     <div class="card-header">Productos
@@ -8,7 +9,7 @@
     <div class="card-body text-primary">
         <h5 class="card-title">Listado de productos</h5>
         <div class="my-2 text-left"></div>
-        <button class="btn btn-primary" type="button" (click)="abrirModal()">   
+        <button class="btn btn-primary" type="button" (click)="abrirModal()">
             Crear Producto
         </button>
         <div *ngIf="productos?.length == 0" class="alert alert.info">
@@ -34,10 +35,29 @@
                     <td>{{producto.categoria.descripcion}}</td>
                     <td>{{producto.tipoEmpaque.descripcion}}</td>
                     <td>{{producto.precioUnitario}}</td>
-                    <td><button (click)="abrirModal(producto)" type="button" name="editar" class="btn btn-primary btn-sm">Editar</button></td>
-                    <td><button (click)="delete(producto)" type="button" name="eliminar" class="btn btn-danger btn-sm">Eliminar</button></td>
+                    <td><button (click)="abrirModal(producto)" type="button" name="editar"
+                            class="btn btn-primary btn-sm">Editar</button></td>
+                    <td><button (click)="delete(producto)" type="button" name="eliminar"
+                            class="btn btn-danger btn-sm">Eliminar</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <nav id="pagination" aria-label="...">
+        <ul class="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item" aria-current="page">
+                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>

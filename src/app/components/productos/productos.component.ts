@@ -12,7 +12,7 @@ import { ProductoCreacionDTO } from './producto-creacion-dto';
 })
 export class ProductosComponent implements OnInit {
   productos: any[];
-  productoSeleccionado: ProductoCreacionDTO;
+  productoSeleccionado: Producto;
   id: number;
 
   constructor(private productoService: ProductoService, private ModalProductService: ModalProductoService) {
@@ -50,14 +50,15 @@ export class ProductosComponent implements OnInit {
 
     abrirModal(producto?: Producto) {
       if (producto) {
-        this.productoSeleccionado = new ProductoCreacionDTO();
+        /*this.productoSeleccionado = new Producto();
         this.productoSeleccionado.codigoCategoria = producto.categoria.codigoCategoria;
         this.productoSeleccionado.codigoEmpaque = producto.tipoEmpaque.codigoEmpaque;
         this.productoSeleccionado.descripcion = producto.descripcion;
-        this.id = producto.codigoProducto;
-      } else {
+        this.id = producto.codigoProducto;*/
+        this.productoSeleccionado = producto;
+        this.ModalProductService.abrirModal();
+      } /*else {
         this.id = null;
-      }
-      this.ModalProductService.abrirModal();
+      }*/
     }
   }

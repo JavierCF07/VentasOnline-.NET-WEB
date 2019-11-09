@@ -3,11 +3,11 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" *ngIf="!id">{{titulo}}</h5>
-                    <h5 class="modal-title" *ngIf="id">Actualizar Producto</h5>
+                    <h5 class="modal-title" *ngIf="!producto">{{titulo}}</h5>
+                    <h5 class="modal-title" *ngIf="producto">Actualizar Producto</h5>
                     <button (click)="cerrarModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <div class="container">
@@ -15,57 +15,69 @@
                             <form #productoForm="ngForm">
                                 <div class="form-group row">
                                     <label for="descripcion" class="col-form-label col-sm-2">Descripcion</label>
-                                    <div class="col-sm-6" *ngIf="id">
-                                        <input type="text" class="form-control" [(ngModel)]="producto.descripcion" name="descripcion" #descripcion="ngModel" placeholder="Ingrese la descripcion del producto">
+                                    <div class="col-sm-6" *ngIf="producto">
+                                        <input type="text" class="form-control" [(ngModel)]="producto.descripcion"
+                                            name="descripcion" #descripcion="ngModel"
+                                            placeholder="Ingrese la descripcion del producto">
                                     </div>
-                                    <div class="col-sm-6" *ngIf="!id">
-                                        <input type="text" class="form-control" [(ngModel)]="producto.descripcion" name="descripcion" #descripcion="ngModel" placeholder="Ingrese la descripcion del producto">
-                                    </div>
+                                    <!-- <div class="col-sm-6" *ngIf="!producto">
+                                        <input type="text" class="form-control" [(ngModel)]="producto.descripcion"
+                                            name="descripcion" #descripcion="ngModel"
+                                            placeholder="Ingrese la descripcion del producto">
+                                    </div> -->
                                 </div>
                                 <div class="form-group row">
                                     <label for="categoria" class="col-form-label col-sm-2">Categoria</label>
-                                    <div class="col-sm-6" *ngIf="id">
-                                        <select name="categoria" class="form-control" [(ngModel)]="producto.codigoCategoria" class="select-ancho">
-                                                      <option [ngValue]="undefined">-----Seleccionar una categoria-----</option>
-                                                      <option *ngFor="let categoria of categorias" [ngValue]="categoria.codigoCategoria">
-                                                        {{categoria.descripcion}}
-                                                      </option>
-                                                    </select>
+                                    <div class="col-sm-6" *ngIf="producto">
+                                        <select name="categoria" class="form-control" [(ngModel)]="producto.codigoCategoria">
+                                            <option [ngValue]="undefined">-----Seleccionar una categoria-----</option>
+                                            <option *ngFor="let categoria of categorias"
+                                                [ngValue]="categoria.codigoCategoria">
+                                                {{categoria.descripcion}}
+                                            </option>
+                                        </select>
                                     </div>
-                                    <div class="col-sm-6" *ngIf="!id">
-                                        <select name="categoria" class="form-control" [(ngModel)]="producto.codigoCategoria" class="select-ancho">
-                                                          <option [ngValue]="undefined">-----Seleccionar una categoria-----</option>
-                                                          <option *ngFor="let categoria of categorias" [ngValue]="categoria.codigoCategoria">
-                                                            {{categoria.descripcion}}
-                                                          </option>
-                                                        </select>
-                                    </div>
+                                    <!-- <div class="col-sm-6" *ngIf="!producto">
+                                        <select name="categoria" class="form-control"
+                                            [(ngModel)]="producto.codigoCategoria" class="select-ancho">
+                                            <option [ngValue]="undefined">-----Seleccionar una categoria-----</option>
+                                            <option *ngFor="let categoria of categorias"
+                                                [ngValue]="categoria.codigoCategoria">
+                                                {{categoria.descripcion}}
+                                            </option>
+                                        </select>
+                                    </div> -->
                                 </div>
                                 <div class="form-group row">
                                     <label for="tipoEmpaque" class="col-form-label col-sm-2">Tipo de Empaque</label>
-                                    <div class="col-sm-6" *ngIf="id">
-                                        <select name="tipoEmpaque" class="form-control" [(ngModel)]="producto.codigoEmpaque" class="select-ancho">
-                                                      <option [ngValue]="undefined">-----Seleccionar un tipo de empaque-----</option>
-                                                      <option *ngFor="let tipo of tipoEmpaques" [ngValue]="tipo.codigoEmpaque">
-                                                        {{tipo.descripcion}}
-                                                      </option>
-                                                    </select>
+                                    <div class="col-sm-6" *ngIf="producto">
+                                        <select name="tipoEmpaque" class="form-control"
+                                            [(ngModel)]="producto.codigoEmpaque" class="select-ancho">
+                                            <option [ngValue]="undefined">-----Seleccionar un tipo de empaque-----
+                                            </option>
+                                            <option *ngFor="let tipo of tipoEmpaques" [ngValue]="tipo.codigoEmpaque">
+                                                {{tipo.descripcion}}
+                                            </option>
+                                        </select>
                                     </div>
-                                    <div class="col-sm-6" *ngIf="!id">
-                                        <select name="tipoEmpaque" class="form-control" [(ngModel)]="producto.codigoEmpaque" class="select-ancho">
-                                                          <option [ngValue]="undefined">-----Seleccionar un tipo de empaque-----</option>
-                                                          <option *ngFor="let tipo of tipoEmpaques" [ngValue]="tipo.codigoEmpaque">
-                                                            {{tipo.descripcion}}
-                                                          </option>
-                                                        </select>
-                                    </div>
+                                    <!-- <div class="col-sm-6" *ngIf="!producto">
+                                        <select name="tipoEmpaque" class="form-control"
+                                            [(ngModel)]="producto.codigoEmpaque" class="select-ancho">
+                                            <option [ngValue]="undefined">-----Seleccionar un tipo de empaque-----
+                                            </option>
+                                            <option *ngFor="let tipo of tipoEmpaques" [ngValue]="tipo.codigoEmpaque">
+                                                {{tipo.descripcion}}
+                                            </option>
+                                        </select>
+                                    </div> -->
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-form-label col-sm-8" *ngIf="!id">
+                                    <div class="col-form-label col-sm-8" *ngIf="!producto">
                                         <button class="btn btn-primary" role="button" (click)="create()">Crear</button>
                                     </div>
-                                    <div class="col-sm-6" *ngIf="id">
-                                        <button class="btn btn-primary" role="button" (click)="update()">Actualizar</button>
+                                    <div class="col-sm-6" *ngIf="producto">
+                                        <button class="btn btn-primary" role="button"
+                                            (click)="update()">Actualizar</button>
                                     </div>
                                 </div>
                             </form>
@@ -73,7 +85,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button (click)="cerrarModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button (click)="cerrarModal()" type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

@@ -18,9 +18,9 @@ import { ModalProductoService } from '../../services/modal/modal-producto.servic
 export class ProductoFormComponent implements OnInit {
   titulo: string;
   mensaje: string;
-  @Input() producto: ProductoCreacionDTO;
+  @Input() producto: Producto;
   @Input() id: number;
-  actualizar: true;
+
   categorias: Categoria[];
   tipoEmpaques: TipoEmpaque[];
 
@@ -35,9 +35,9 @@ export class ProductoFormComponent implements OnInit {
   ngOnInit() {
     this.categoriaService.getCategorias().subscribe(categoria => this.categorias = categoria);
     this.tipoEmpaqueService.getTipoEmpaque().subscribe(tipoEmpaque => this.tipoEmpaques = tipoEmpaque);
-    if (!this.id) {
-      this.producto = new ProductoCreacionDTO();
-    }
+    /*if (!this.id) {
+      this.producto = new Producto();
+    }*/
   }
 
   create(): void {
@@ -58,7 +58,11 @@ export class ProductoFormComponent implements OnInit {
   }
 
   update(): void {
-    this.productoService.update(this.id, this.producto).subscribe(
+    const nuevo = new ProductoCreacionDTO();
+    nuevo.codigoCategoria = this.producto.codigoCategoria;
+    nuevo.codigoEmpaque = this.producto.codigoEmpaque;
+    nuevo.descripcion = this.producto.descripcion;
+    this.productoService.update(this.producto.codigoProducto, this.producto).subscribe(
       producto => {
         this.router.navigate(['/productos']);
         Swal.fire('Actualizar producto', `El producto ${this.producto.descripcion}

@@ -1,3 +1,8 @@
 .boton {
     float: right;
 }
+
+.pagination {
+    float: right;
+    margin-right: 5%;
+}
