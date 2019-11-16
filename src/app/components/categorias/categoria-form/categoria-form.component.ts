@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { ModalProductoService } from '../../services/modal/modal-producto.service';
 import { Categoria } from '../categoria';
 import Swal from 'sweetalert2';
-import { ProductoCreacionDTO } from '../../productos/producto-creacion-dto';
 
 @Component({
   selector: 'app-categoria-form',
@@ -16,7 +15,7 @@ export class CategoriaFormComponent implements OnInit {
   titulo: string;
   mensaje: string;
   @Input() categoria: Categoria;
-  @Input() id: number;
+
   categorias: Categoria[];
 
   constructor(
@@ -27,18 +26,18 @@ export class CategoriaFormComponent implements OnInit {
 
   ngOnInit() {
     this.categoriaService.getCategorias().subscribe(categoria => this.categorias = categoria);
-    /*if (!this.id) {
-      this.categoria = new CategoriaCreacionDTO();
-    }*/
   }
 
   create(): void {
-    this.categoriaService.create(this.categoria).subscribe(
-      producto => {
-        this.router.navigate(['/categorias']);
+    const nuevo = new CategoriaCreacionDTO();
+    nuevo.descripcion = this.categoria.descripcion;
+    this.categoriaService.create(nuevo).subscribe(
+      categoria => {
         Swal.fire('Nueva categoria', `La categoria ${this.categoria.descripcion} ha sido creado con exito`,
         'success');
+        this.modalCategoriaService.notificarCambio.emit(categoria);
         this.modalCategoriaService.cerrarModal();
+        this.router.navigate(['/categorias']);
       },
       error => {
         this.mensaje = 'The description field is required';
@@ -51,18 +50,17 @@ export class CategoriaFormComponent implements OnInit {
   update(): void {
     const nuevo = new CategoriaCreacionDTO();
     nuevo.descripcion = this.categoria.descripcion;
-    this.categoriaService.update(this.categoria.codigoCategoria, this.categoria).subscribe(
-      categoria => {
-        this.router.navigate(['/categorias']);
-        Swal.fire('Actualizar categoria', `La categoria ${this.categoria.descripcion} ha sido actualizada correctamente`, 'success');
+    this.categoriaService.update(this.categoria.codigoCategoria, nuevo).subscribe(
+      () => {
+        Swal.fire('Actualizar categoria', `La categoria ${nuevo.descripcion} ha sido actualizada correctamente`, 'success');
+        this.modalCategoriaService.notificarCambio.emit(this.categoria);
         this.modalCategoriaService.cerrarModal();
-        this.categoria = null;
+        this.router.navigate(['/categorias']);
       }
     );
   }
 
   cerrarModal(): void {
     this.modalCategoriaService.cerrarModal();
-    console.log(this.id);
   }
 }

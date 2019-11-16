@@ -3,7 +3,6 @@ import { ProductoService } from '../services/producto.service';
 import { Producto } from './producto';
 import Swal from 'sweetalert2';
 import { ModalProductoService } from '../services/modal/modal-producto.service';
-import { ProductoCreacionDTO } from './producto-creacion-dto';
 
 @Component({
   selector: 'app-productos',
@@ -13,7 +12,7 @@ import { ProductoCreacionDTO } from './producto-creacion-dto';
 export class ProductosComponent implements OnInit {
   productos: any[];
   productoSeleccionado: Producto;
-  id: number;
+  tipo: string;
 
   constructor(private productoService: ProductoService, private ModalProductService: ModalProductoService) {
     this.productoService.getProductos().subscribe((data: any) => {
@@ -22,7 +21,18 @@ export class ProductosComponent implements OnInit {
    }
 
   ngOnInit() {
-
+    this.ModalProductService.notificarCambio.subscribe(producto => {
+      if (this.tipo === 'new') {
+        this.productos.push(producto);
+      } else if (this.tipo === 'update') {
+        this.productos = this.productos.map(productoOriginal => {
+          if (producto.codigoProducto === productoOriginal.codigoProducto) {
+            productoOriginal = producto;
+          }
+          return productoOriginal;
+        });
+      }
+    });
   }
 
   delete(producto: Producto): void {
@@ -50,15 +60,12 @@ export class ProductosComponent implements OnInit {
 
     abrirModal(producto?: Producto) {
       if (producto) {
-        /*this.productoSeleccionado = new Producto();
-        this.productoSeleccionado.codigoCategoria = producto.categoria.codigoCategoria;
-        this.productoSeleccionado.codigoEmpaque = producto.tipoEmpaque.codigoEmpaque;
-        this.productoSeleccionado.descripcion = producto.descripcion;
-        this.id = producto.codigoProducto;*/
         this.productoSeleccionado = producto;
-        this.ModalProductService.abrirModal();
-      } /*else {
-        this.id = null;
-      }*/
+        this.tipo = 'update';
+      } else {
+        this.tipo = 'new';
+        this.productoSeleccionado = new Producto();
+      }
+      this.ModalProductService.abrirModal();
     }
   }

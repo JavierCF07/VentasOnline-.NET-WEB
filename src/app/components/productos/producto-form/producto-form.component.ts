@@ -19,7 +19,6 @@ export class ProductoFormComponent implements OnInit {
   titulo: string;
   mensaje: string;
   @Input() producto: Producto;
-  @Input() id: number;
 
   categorias: Categoria[];
   tipoEmpaques: TipoEmpaque[];
@@ -35,18 +34,22 @@ export class ProductoFormComponent implements OnInit {
   ngOnInit() {
     this.categoriaService.getCategorias().subscribe(categoria => this.categorias = categoria);
     this.tipoEmpaqueService.getTipoEmpaque().subscribe(tipoEmpaque => this.tipoEmpaques = tipoEmpaque);
-    /*if (!this.id) {
-      this.producto = new Producto();
-    }*/
   }
 
   create(): void {
-    this.productoService.create(this.producto).subscribe(
+    const nuevo = new ProductoCreacionDTO();
+    nuevo.codigoCategoria = this.producto.categoria.codigoCategoria;
+    nuevo.codigoEmpaque = this.producto.tipoEmpaque.codigoEmpaque;
+    nuevo.descripcion = this.producto.descripcion;
+    this.productoService.create(nuevo).subscribe(
       producto => {
-        this.router.navigate(['/productos']);
         Swal.fire('Nuevo producto', `El producto ${this.producto.descripcion} ha sido creado con éxito`,
         'success');
+        producto.categoria = this.producto.categoria;
+        producto.tipoEmpaque = this.producto.tipoEmpaque;
+        this.modalProductoService.notificarCambio.emit(producto);
         this.modalProductoService.cerrarModal();
+        this.router.navigate(['/productos']);
       },
       error => {
         this.mensaje = 'The descripcion field is required';
@@ -62,19 +65,34 @@ export class ProductoFormComponent implements OnInit {
     nuevo.codigoCategoria = this.producto.codigoCategoria;
     nuevo.codigoEmpaque = this.producto.codigoEmpaque;
     nuevo.descripcion = this.producto.descripcion;
-    this.productoService.update(this.producto.codigoProducto, this.producto).subscribe(
-      producto => {
-        this.router.navigate(['/productos']);
-        Swal.fire('Actualizar producto', `El producto ${this.producto.descripcion}
+    this.productoService.update(this.producto.codigoProducto, nuevo).subscribe(
+      () => {
+        Swal.fire('Actualizar producto', `El producto ${nuevo.descripcion}
         ha sido actualizado`, 'success');
+        this.modalProductoService.notificarCambio.emit(this.producto);
         this.modalProductoService.cerrarModal();
-        this.producto = null;
+        this.router.navigate(['/productos']);
       }
     );
   }
 
   cerrarModal(): void {
     this.modalProductoService.cerrarModal();
-    console.log(this.id);
+  }
+
+  compararCategoria(o1: Categoria, o2: Categoria): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ?
+    false : o1.codigoCategoria === o2.codigoCategoria;
+  }
+
+  compararTipoEmpaque(o1: TipoEmpaque, o2: TipoEmpaque): boolean {
+    if (o1 === undefined && o2 === undefined) {
+      return true;
+    }
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ?
+    false : o1.codigoEmpaque === o2.codigoEmpaque;
   }
 }

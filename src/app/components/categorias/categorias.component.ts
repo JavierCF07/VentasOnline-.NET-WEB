@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../services/categoria-service.service';
-import { CategoriaCreacionDTO } from './categoria-creacion-dto';
 import { Categoria } from './categoria';
 import Swal from 'sweetalert2';
-import { ResourceLoader } from '@angular/compiler';
 import { ModalProductoService } from '../services/modal/modal-producto.service';
 
 @Component({
@@ -14,7 +12,7 @@ import { ModalProductoService } from '../services/modal/modal-producto.service';
 export class CategoriasComponent implements OnInit {
   categorias: any[];
   categoriaSeleccionada: Categoria;
-  id: number;
+  tipo: string;
 
   constructor(private categoriaService: CategoriaService, private ModalCategoriaService: ModalProductoService) {
     this.categoriaService.getCategorias().subscribe((data: any) => {
@@ -23,6 +21,18 @@ export class CategoriasComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.ModalCategoriaService.notificarCambio.subscribe(categoria => {
+      if (this.tipo === 'new') {
+        this.categorias.push(categoria);
+      } else if (this.tipo === 'update') {
+        this.categorias = this.categorias.map(categoriaOriginal => {
+          if (categoria.codigoCategoria === categoriaOriginal.codigoCategoria) {
+            categoriaOriginal = categoria;
+          }
+          return categoriaOriginal;
+        });
+      }
+    });
   }
 
   delete(categoria: Categoria): void {
@@ -50,13 +60,12 @@ export class CategoriasComponent implements OnInit {
 
   abrirModal(categoria?: Categoria) {
     if (categoria) {
-      /*this.categoriaSeleccionada = new CategoriaCreacionDTO();
-      this.categoriaSeleccionada.descripcion = categoria.descripcion;
-      this.id = categoria.codigoCategoria;*/
       this.categoriaSeleccionada = categoria;
-      this.ModalCategoriaService.abrirModal();
-    } /*else {
-      this.id = null;
-    }*/
+      this.tipo = 'update';
+    } else {
+      this.tipo = 'new';
+      this.categoriaSeleccionada = new Categoria();
+    }
+    this.ModalCategoriaService.abrirModal();
   }
 }

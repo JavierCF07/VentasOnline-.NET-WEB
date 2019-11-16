@@ -3,8 +3,8 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" *ngIf="!categoria">{{titulo}}</h5>
-          <h5 class="modal-title" *ngIf="categoria">Actualizar Categoria</h5>
+          <h5 class="modal-title" *ngIf="!categoria.codigoCategoria">{{titulo}}</h5>
+          <h5 class="modal-title" *ngIf="categoria.codigoCategoria">Actualizar Categoria</h5>
           <button (click)="cerrarModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -21,11 +21,11 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <div class="col-form-label col-sm-8" *ngIf="!categoria">
-                    <button class="btn btn-primary" role="button" (click)="create()">Crear</button>
+                  <div class="col-form-label col-sm-8" >
+                    <button *ngIf="!categoria.codigoCategoria" class="btn btn-primary" role="button" (click)="create()">Crear</button>
                   </div>
-                  <div class="col-sm-6" *ngIf="categoria">
-                    <button class="btn btn-primary" role="button" (click)="update()">Actualizar</button>
+                  <div class="col-sm-6">
+                    <button *ngIf="categoria.codigoCategoria" class="btn btn-primary" role="button" (click)="update()">Actualizar</button>
                   </div>
                 </div>
               </form>
