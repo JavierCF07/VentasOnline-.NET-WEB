@@ -17,6 +17,8 @@ import { ProductosComponent } from './components/productos/productos.component';
 import { AuthInterceptor } from './components/login/interceptors/auth.interceptor';
 import { ProductoFormComponent } from './components/productos/producto-form/producto-form.component';
 import { CategoriaFormComponent } from './components/categorias/categoria-form/categoria-form.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { TipoEmpaqueFormComponent } from './components/tipo-empaques/tipo-empaque-form/tipo-empaque-form.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { CategoriaFormComponent } from './components/categorias/categoria-form/c
     LoginComponent,
     ProductosComponent,
     ProductoFormComponent,
-    CategoriaFormComponent
+    CategoriaFormComponent,
+    PaginatorComponent,
+    TipoEmpaqueFormComponent
   ],
   imports: [
     BrowserModule,

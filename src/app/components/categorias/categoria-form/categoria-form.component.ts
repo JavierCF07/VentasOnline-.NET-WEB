@@ -17,7 +17,6 @@ export class CategoriaFormComponent implements OnInit {
   @Input() categoria: Categoria;
 
   categorias: Categoria[];
-
   constructor(
     private categoriaService: CategoriaService,
     private router: Router,
@@ -25,7 +24,7 @@ export class CategoriaFormComponent implements OnInit {
   ) {this.titulo = 'Agregar Categoria'; }
 
   ngOnInit() {
-    this.categoriaService.getCategorias().subscribe(categoria => this.categorias = categoria);
+    this.categoriaService.getCategorias().subscribe(categoria => this.categorias = categoria as Categoria[]);
   }
 
   create(): void {

@@ -32,7 +32,7 @@ export class ProductoFormComponent implements OnInit {
     ) {this.titulo = 'Agregar Producto'; }
 
   ngOnInit() {
-    this.categoriaService.getCategorias().subscribe(categoria => this.categorias = categoria);
+    this.categoriaService.getCategorias().subscribe((response: any) => this.categorias = response.content as Categoria[]);
     this.tipoEmpaqueService.getTipoEmpaque().subscribe(tipoEmpaque => this.tipoEmpaques = tipoEmpaque);
   }
 

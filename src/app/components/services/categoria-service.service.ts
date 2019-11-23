@@ -11,16 +11,16 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class CategoriaService {
-  private API_URL = 'https://localhost:44384/api/v1';
-  private token;
+  private urlEnpoint = 'https://localhost:44384/api/v1';
+
   constructor(private httpClient: HttpClient, private router: Router) { }
 
   getData(url: string) {
     /*const headers = new HttpHeaders({'Authorization': `Bearer ${this.token}`});*/
-    return this.httpClient.get<Categoria[]>(`${this.API_URL}/${url}` /*{headers}*/);
+    return this.httpClient.get(`${this.urlEnpoint}/${url}` /*{headers}*/);
   }
   getCategory(): Observable<Categoria[]> {
-    return this.httpClient.get<Categoria[]>(`${this.API_URL}/categoria`);
+    return this.httpClient.get<Categoria[]>(`${this.urlEnpoint}/categoria`);
   }
 
   getCategorias() {
@@ -28,7 +28,7 @@ export class CategoriaService {
   }
 
   create(categoria: CategoriaCreacionDTO): Observable<Categoria> {
-    return this.httpClient.post(`${this.API_URL}/categorias`, categoria).pipe(
+    return this.httpClient.post(`${this.urlEnpoint}/categoria`, categoria).pipe(
       map((
         response: any) => response as Categoria),
       catchError( e => {
@@ -41,7 +41,7 @@ export class CategoriaService {
   }
 
   delete(id: number): Observable<Categoria> {
-    return this.httpClient.delete<Categoria>(`${this.API_URL}/categorias/${id}`).pipe(
+    return this.httpClient.delete<Categoria>(`${this.urlEnpoint}/categoria/${id}`).pipe(
       catchError(e => {
         return throwError(e);
       })
@@ -49,7 +49,7 @@ export class CategoriaService {
   }
 
   update(id: number, categoria: CategoriaCreacionDTO): Observable<any> {
-    return this.httpClient.put<any>(`${this.API_URL}/categorias/${id}`, categoria).pipe(
+    return this.httpClient.put<any>(`${this.urlEnpoint}/categoria/${id}`, categoria).pipe(
       catchError(e => {
         if (e.status === 400) {
           return throwError(e);
@@ -60,7 +60,7 @@ export class CategoriaService {
   }
 
   getCategoria(id: number): Observable<Categoria> {
-    return this.httpClient.get<Categoria>(`${this.API_URL}/categorias/${id}`).pipe(
+    return this.httpClient.get<Categoria>(`${this.urlEnpoint}/categoria/${id}`).pipe(
       catchError(e => {
         if (e.status !== 401) {
           this.router.navigate(['/categoria']);

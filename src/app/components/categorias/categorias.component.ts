@@ -10,13 +10,14 @@ import { ModalProductoService } from '../services/modal/modal-producto.service';
   styleUrls: ['./categorias.component.css']
 })
 export class CategoriasComponent implements OnInit {
-  categorias: any[];
+  categorias: Categoria[] = [];
   categoriaSeleccionada: Categoria;
   tipo: string;
-
+  paginador: any;
   constructor(private categoriaService: CategoriaService, private ModalCategoriaService: ModalProductoService) {
-    this.categoriaService.getCategorias().subscribe((data: any) => {
-      this.categorias = data;
+    this.categoriaService.getCategorias().subscribe((response: any) => {
+      this.categorias = response.content as Categoria[];
+      this.paginador = response;
     });
     }
 

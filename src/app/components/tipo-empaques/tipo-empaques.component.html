@@ -1,9 +1,11 @@
+<app-tipo-empaque-form [tipoEmpaque]="tipoEmpaqueSeleccionado"></app-tipo-empaque-form>
+
 <div class="card border-primary mb-3">
     <div class="card-header">Tipo de Empaque</div>
     <div class="card-body text-primary">
         <h5 class="card-title">Listado de Tipo de Empaque</h5>
         <div class="my-2 text-left"></div>
-        <button class="btn btn-primary" type="button" routerLink="['/home']">
+        <button class="btn btn-primary" type="button" (click)="abrirModal()">
       Crear Tipo de Empaque
     </button>
         <div *ngIf="tipoEmpaque?.length == 0" class="alert alert.info">
@@ -21,6 +23,10 @@
                 <tr *ngFor="let TipoEmpaque of tipoEmpaque">
                     <td>{{TipoEmpaque.codigoEmpaque}}</td>
                     <td>{{TipoEmpaque.descripcion}}</td>
+                    <td><button (click)="abrirModal(tipoEmpaque)" type="button" name="editar"
+                        class="btn btn-primary btn-sm">Editar</button></td>
+                    <td><button (click)="delete(tipoEmpaque)" type="button" name="eliminar"
+                        class="btn btn-danger btn-sm">Eliminar</button></td>
                 </tr>
             </tbody>
         </table>
