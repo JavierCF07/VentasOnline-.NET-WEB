@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CategoriaCreacionDTO } from '../categoria-creacion-dto';
 import { CategoriaService } from '../../services/categoria-service.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ModalProductoService } from '../../services/modal/modal-producto.service';
 import { Categoria } from '../categoria';
 import Swal from 'sweetalert2';
@@ -21,10 +21,21 @@ export class CategoriaFormComponent implements OnInit {
     private categoriaService: CategoriaService,
     private router: Router,
     private modalCategoriaService: ModalProductoService,
-  ) {this.titulo = 'Agregar Categoria'; }
+    private activatedRoute: ActivatedRoute
+  ) { this.titulo = 'Agregar Categoria'; }
 
   ngOnInit() {
-    this.categoriaService.getCategorias().subscribe(categoria => this.categorias = categoria as Categoria[]);
+    this.activatedRoute.paramMap.subscribe(params => {
+      let page: number = + params.get('page');
+      if (!page) {
+        page = 0;
+      }
+      this.categoriaService.getCategoriaPage(page)
+        .subscribe((response: any) => {
+          this.categorias = response.content as Categoria[];
+        }
+        );
+    });
   }
 
   create(): void {
@@ -33,7 +44,7 @@ export class CategoriaFormComponent implements OnInit {
     this.categoriaService.create(nuevo).subscribe(
       categoria => {
         Swal.fire('Nueva categoria', `La categoria ${this.categoria.descripcion} ha sido creado con exito`,
-        'success');
+          'success');
         this.modalCategoriaService.notificarCambio.emit(categoria);
         this.modalCategoriaService.cerrarModal();
         this.router.navigate(['/categorias']);
@@ -54,7 +65,7 @@ export class CategoriaFormComponent implements OnInit {
         Swal.fire('Actualizar categoria', `La categoria ${nuevo.descripcion} ha sido actualizada correctamente`, 'success');
         this.modalCategoriaService.notificarCambio.emit(this.categoria);
         this.modalCategoriaService.cerrarModal();
-        this.router.navigate(['/categorias']);
+        this.router.navigate(['/categoria']);
       }
     );
   }

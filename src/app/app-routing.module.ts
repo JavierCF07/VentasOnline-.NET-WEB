@@ -14,7 +14,8 @@ import { ProductoFormComponent } from './components/productos/producto-form/prod
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
-  {path: 'categorias', component: CategoriasComponent, canActivate: [AuthGuard]},
+  {path: 'categoria', component: CategoriasComponent, canActivate: [AuthGuard]},
+  {path: 'categoria/page/:page', component: CategoriasComponent, canActivate: [AuthGuard]},
   {path: 'tipoEmpaque', component: TipoEmpaquesComponent, canActivate: [AuthGuard]},
   {path: 'clientes', component: ClientesComponent, canActivate: [AuthGuard]},
   {path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard]},
