@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './components/login/guards/authguard.guard';
 import { ProductosComponent } from './components/productos/productos.component';
 import { ProductoFormComponent } from './components/productos/producto-form/producto-form.component';
+import { EmailClienteComponent } from './components/email-cliente/email-cliente.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'tipoEmpaque', component: TipoEmpaquesComponent, canActivate: [AuthGuard]},
   {path: 'clientes', component: ClientesComponent, canActivate: [AuthGuard]},
   {path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard]},
+  {path: 'email', component: EmailClienteComponent, canActivate: [AuthGuard]},
   {path: 'productos', component: ProductosComponent, canActivate: [AuthGuard]},
   {path: 'productoForm', component: ProductoFormComponent, canActivate: [AuthGuard]},
   {path: 'productoForm/:id', component: ProductoFormComponent, canActivate: [AuthGuard]},

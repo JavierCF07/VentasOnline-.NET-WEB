@@ -14,6 +14,7 @@ export class CategoriasComponent implements OnInit {
   categoriaSeleccionada: Categoria;
   tipo: string;
   paginador: any;
+
   constructor(private categoriaService: CategoriaService, private ModalCategoriaService: ModalProductoService) {
     this.categoriaService.getCategorias().subscribe((response: any) => {
       this.categorias = response.content as Categoria[];

@@ -17,6 +17,7 @@ export class CategoriaFormComponent implements OnInit {
   @Input() categoria: Categoria;
 
   categorias: Categoria[];
+
   constructor(
     private categoriaService: CategoriaService,
     private router: Router,

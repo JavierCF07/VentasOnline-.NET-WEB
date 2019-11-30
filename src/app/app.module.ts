@@ -19,6 +19,10 @@ import { ProductoFormComponent } from './components/productos/producto-form/prod
 import { CategoriaFormComponent } from './components/categorias/categoria-form/categoria-form.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { TipoEmpaqueFormComponent } from './components/tipo-empaques/tipo-empaque-form/tipo-empaque-form.component';
+import { ClienteFormComponent } from './components/clientes/cliente-form/cliente-form.component';
+import { EmailClienteComponent } from './components/email-cliente/email-cliente.component';
+import { EmailClienteFormComponent } from './components/email-cliente/email-cliente-form/email-cliente-form.component';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +39,10 @@ import { TipoEmpaqueFormComponent } from './components/tipo-empaques/tipo-empaqu
     ProductoFormComponent,
     CategoriaFormComponent,
     PaginatorComponent,
-    TipoEmpaqueFormComponent
+    TipoEmpaqueFormComponent,
+    ClienteFormComponent,
+    EmailClienteComponent,
+    EmailClienteFormComponent
   ],
   imports: [
     BrowserModule,

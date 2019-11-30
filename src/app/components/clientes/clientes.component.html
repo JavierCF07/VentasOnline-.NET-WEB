@@ -1,11 +1,19 @@
+<app-cliente-form [cliente]="clienteSeleccionado"></app-cliente-form>
+
 <div class="card border-primary mb-3">
-    <div class="card-header">Clientes</div>
+    <div class="card-header">Clientes
+        <button id="boton" class="btn btn-primary" type="button" routerLink='home'>Regresar</button>
+    </div>
     <div class="card-body text-primary">
         <h5 class="card-title">Listado de Clientes</h5>
         <div class="my-2 text-left"></div>
-        <button class="btn btn-primary" type="button" routerLink="['/home']">
-      Crear Cliente
-    </button>
+        <button class="btn btn-primary" type="button" (click)="abrirModal()">
+            Crear Cliente
+        </button>
+        <button class="btn btn-primary" style="margin-left: 10px;" type="button" routerLink="email">Agregar
+            Email del Cliente</button>
+        <button class="btn btn-primary" style="margin-left: 10px;" type="button" (click)="abrirModal()">Agregar Telefono
+            del Cliente</button>
         <div *ngIf="clientes?.length == 0" class="alert alert.info">
             No hay registros en la base de datos
         </div>
@@ -14,15 +22,27 @@
             <thead>
                 <tr>
                     <th>NIT</th>
-                    <th>Descripcion</th>
+                    <th>DPI</th>
+                    <th>Nombre</th>
                     <th>Dirección</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let Clientes of clientes">
                     <td>{{Clientes.nit}}</td>
+                    <td>{{Clientes.dpi}}</td>
                     <td>{{Clientes.nombre}}</td>
                     <td>{{Clientes.direccion}}</td>
+                    <td>
+                        <button (click)="abrirModal(cliente)" type="button" name="editar"
+                            class="btn btn-primary btn-sm">Editar</button>
+                    </td>
+                    <td>
+                        <button (click)="delete(cliente)" type="button" name="eliminar"
+                            class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
