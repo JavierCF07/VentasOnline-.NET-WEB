@@ -19,8 +19,9 @@ export class CategoriaService {
     /*const headers = new HttpHeaders({'Authorization': `Bearer ${this.token}`});*/
     return this.httpClient.get(`${this.urlEnpoint}/${url}` /*{headers}*/);
   }
-  getCategory(): Observable<Categoria[]> {
-    return this.httpClient.get<Categoria[]>(`${this.urlEnpoint}/categoria`);
+
+  public getCategoriaPage(page?: number): Observable<any> {
+    return this.httpClient.get(`${this.urlEnpoint}/categoria/page/${page}`);
   }
 
   getCategorias() {
@@ -31,11 +32,11 @@ export class CategoriaService {
     return this.httpClient.post(`${this.urlEnpoint}/categoria`, categoria).pipe(
       map((
         response: any) => response as Categoria),
-      catchError( e => {
-          if (e.status === 4000) {
-            return throwError(e);
-          }
+      catchError(e => {
+        if (e.status === 4000) {
           return throwError(e);
+        }
+        return throwError(e);
       })
     );
   }

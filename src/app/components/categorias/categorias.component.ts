@@ -3,6 +3,7 @@ import { CategoriaService } from '../services/categoria-service.service';
 import { Categoria } from './categoria';
 import Swal from 'sweetalert2';
 import { ModalProductoService } from '../services/modal/modal-producto.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-categorias',
@@ -15,14 +16,25 @@ export class CategoriasComponent implements OnInit {
   tipo: string;
   paginador: any;
 
-  constructor(private categoriaService: CategoriaService, private ModalCategoriaService: ModalProductoService) {
-    this.categoriaService.getCategorias().subscribe((response: any) => {
-      this.categorias = response.content as Categoria[];
-      this.paginador = response;
-    });
-    }
+  constructor(
+    private categoriaService: CategoriaService,
+    private ModalCategoriaService: ModalProductoService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.activatedRoute.paramMap.subscribe(params => {
+      let page: number = + params.get('page');
+      if (!page) {
+        page = 0;
+      }
+      this.categoriaService.getCategoriaPage(page)
+      .subscribe((response: any) => {
+        this.categorias = response.content as Categoria[];
+        this.paginador = response;
+      }
+      );
+    });
+
     this.ModalCategoriaService.notificarCambio.subscribe(categoria => {
       if (this.tipo === 'new') {
         this.categorias.push(categoria);

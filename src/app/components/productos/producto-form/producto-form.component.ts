@@ -5,7 +5,7 @@ import { CategoriaService } from '../../services/categoria-service.service';
 import { TipoEmpaqueService } from '../../services/tipo-empaque.service';
 import { ProductoService } from '../../services/producto.service';
 import { Categoria } from '../../categorias/categoria';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ProductoCreacionDTO } from '../producto-creacion-dto';
 import { ModalProductoService } from '../../services/modal/modal-producto.service';
@@ -20,8 +20,8 @@ export class ProductoFormComponent implements OnInit {
   mensaje: string;
   @Input() producto: Producto;
 
-  categorias: Categoria[];
-  tipoEmpaques: TipoEmpaque[];
+  categorias: Categoria[] = [];
+  tipoEmpaques: TipoEmpaque[] = [];
 
   constructor(
     private categoriaService: CategoriaService,
@@ -29,10 +29,11 @@ export class ProductoFormComponent implements OnInit {
     private productoService: ProductoService,
     private router: Router,
     private modalProductoService: ModalProductoService,
-    ) {this.titulo = 'Agregar Producto'; }
+    private activatedRoute: ActivatedRoute,
+  ) { this.titulo = 'Agregar Producto'; }
 
   ngOnInit() {
-    this.categoriaService.getCategorias().subscribe((response: any) => this.categorias = response.content as Categoria[]);
+    this.categoriaService.getCategorias().subscribe(categoria => this.categorias = categoria as Categoria[]);
     this.tipoEmpaqueService.getTipoEmpaque().subscribe(tipoEmpaque => this.tipoEmpaques = tipoEmpaque);
   }
 
@@ -44,7 +45,7 @@ export class ProductoFormComponent implements OnInit {
     this.productoService.create(nuevo).subscribe(
       producto => {
         Swal.fire('Nuevo producto', `El producto ${this.producto.descripcion} ha sido creado con éxito`,
-        'success');
+          'success');
         producto.categoria = this.producto.categoria;
         producto.tipoEmpaque = this.producto.tipoEmpaque;
         this.modalProductoService.notificarCambio.emit(producto);
@@ -85,7 +86,7 @@ export class ProductoFormComponent implements OnInit {
       return true;
     }
     return o1 === null || o2 === null || o1 === undefined || o2 === undefined ?
-    false : o1.codigoCategoria === o2.codigoCategoria;
+      false : o1.codigoCategoria === o2.codigoCategoria;
   }
 
   compararTipoEmpaque(o1: TipoEmpaque, o2: TipoEmpaque): boolean {
@@ -93,6 +94,6 @@ export class ProductoFormComponent implements OnInit {
       return true;
     }
     return o1 === null || o2 === null || o1 === undefined || o2 === undefined ?
-    false : o1.codigoEmpaque === o2.codigoEmpaque;
+      false : o1.codigoEmpaque === o2.codigoEmpaque;
   }
 }
