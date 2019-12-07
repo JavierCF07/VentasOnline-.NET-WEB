@@ -3,6 +3,7 @@ import { EmailCliente } from './email-cliente';
 import { EmailClienteService } from '../services/email-cliente.service';
 import { ModalProductoService } from '../services/modal/modal-producto.service';
 import Swal from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-email-cliente',
@@ -13,14 +14,25 @@ export class EmailClienteComponent implements OnInit {
   emailClientes: EmailCliente[] = [];
   emailSeleccionado: EmailCliente;
   tipo: string;
+  paginador: any;
 
-  constructor(private emailService: EmailClienteService, private ModalClienteService: ModalProductoService) {
-    this.emailService.getEmailClientes().subscribe((data: any) => {
-      this.emailClientes = data;
-    });
-  }
+  constructor(
+    private emailService: EmailClienteService,
+    private ModalClienteService: ModalProductoService,
+    private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
+    this.activatedRoute.paramMap.subscribe(params => {
+      let page: number = + params.get('page');
+      if (!page) {
+        page = 0;
+      }
+      this.emailService.getEmailClientesPage(page).subscribe((
+        response: any)=> {
+          this.emailClientes = response.content as EmailCliente[];
+          this.paginador = response;
+        });
+    });
     this.ModalClienteService.notificarCambio.subscribe(emailCliente => {
       if (this.tipo === 'new') {
         this.emailClientes.push(emailCliente);
@@ -58,7 +70,7 @@ export class EmailClienteComponent implements OnInit {
     });
   }
 
-  abrirModalEmail(emailCliente?: EmailCliente) {
+  abrirModal(emailCliente?: EmailCliente) {
     if (emailCliente) {
       this.emailSeleccionado = emailCliente;
       this.tipo = 'update';

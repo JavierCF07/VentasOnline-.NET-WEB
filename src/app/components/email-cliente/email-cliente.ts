@@ -3,6 +3,6 @@ import { Clientes } from '../clientes/clientes';
 export class EmailCliente {
     codigoEmail: number;
     email: string;
-    nombre: string;
+    nit: number;
     clientes: Clientes;
 }

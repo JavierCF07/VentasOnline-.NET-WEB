@@ -20,6 +20,10 @@ export class EmailClienteService {
     return this.httpClient.get<Clientes[]>(`${this.urlEnpoint}/clientes`);
   }
 
+  getEmailClientesPage(page?: number): Observable<any> {
+    return this.httpClient.get(`${this.urlEnpoint}/emailClientes/page/${page}`);
+  }
+
   getEmailClientes(): Observable<EmailCliente[]> {
     return this.httpClient.get<EmailCliente[]>(`${this.urlEnpoint}/emailClientes`);
   }
@@ -29,7 +33,7 @@ export class EmailClienteService {
       map((
         response: any) => response as EmailCliente),
       catchError(e => {
-        if (e.status === 4000) {
+        if (e.status === 400) {
           return throwError(e);
         }
         return throwError(e);
