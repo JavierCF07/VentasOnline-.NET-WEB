@@ -1,10 +1,10 @@
-import { Component, OnInit, OnChanges, Input, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'app-paginator',
-  templateUrl: './paginator.component.html'
+  selector: 'app-paginator-tipo',
+  templateUrl: './paginator-tipo.component.html'
 })
-export class PaginatorComponent implements OnInit, OnChanges {
+export class PaginatorTipoComponent implements OnInit, OnChanges {
   @Input() paginador: any;
   paginas: number[];
   desde: number;
@@ -31,6 +31,5 @@ export class PaginatorComponent implements OnInit, OnChanges {
     } else {
        this.paginas = new Array(this.paginador.totalPages).fill(0).map((valor, indice) => indice + 1);
     }
-    console.log(this.paginas.length);
   }
 }

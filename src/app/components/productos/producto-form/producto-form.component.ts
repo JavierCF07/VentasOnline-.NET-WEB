@@ -20,6 +20,7 @@ export class ProductoFormComponent implements OnInit {
   mensaje: string;
   @Input() producto: Producto;
 
+  productos: Producto[] = [];
   categorias: Categoria[] = [];
   tipoEmpaques: TipoEmpaque[] = [];
 
@@ -33,6 +34,16 @@ export class ProductoFormComponent implements OnInit {
   ) { this.titulo = 'Agregar Producto'; }
 
   ngOnInit() {
+    this.activatedRoute.paramMap.subscribe(params => {
+      let page: number = + params.get('page');
+      if (!page) {
+        page = 0;
+      }
+      this.productoService.getProductoPage(page)
+      .subscribe((response: any) => {
+        this.productos = response.content as Producto[];
+      });
+    });
     this.categoriaService.getCategorias().subscribe(categoria => this.categorias = categoria as Categoria[]);
     this.tipoEmpaqueService.getTipoEmpaque().subscribe(tipoEmpaque => this.tipoEmpaques = tipoEmpaque);
   }

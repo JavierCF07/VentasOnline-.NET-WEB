@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TipoEmpaque } from '../tipo-empaque';
 import { TipoEmpaqueService } from '../../services/tipo-empaque.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ModalProductoService } from '../../services/modal/modal-producto.service';
 import { TipoEmpaqueCreacionDTO } from '../tipo-empaque-creacion-dto';
 import Swal from 'sweetalert2';
@@ -21,11 +21,22 @@ export class TipoEmpaqueFormComponent implements OnInit {
   constructor(
     private tipoEmpaqueService: TipoEmpaqueService,
     private router: Router,
-    private modalTipoEmpaqueService: ModalProductoService
+    private modalTipoEmpaqueService: ModalProductoService,
+    private activatedRoute: ActivatedRoute
   ) { this.titulo = 'Agregar Tipo de Empaque'; }
 
   ngOnInit() {
-    this.tipoEmpaqueService.getTipoEmpaque().subscribe(tipoEmpaque => this.tipoEmpaques = tipoEmpaque);
+    this.activatedRoute.paramMap.subscribe(params => {
+      let page: number = + params.get('page');
+      if (!page) {
+        page = 0;
+      }
+      this.tipoEmpaqueService.getTipoEmpaquePage(page)
+        .subscribe((response: any) => {
+          this.tipoEmpaques = response.content as TipoEmpaque[];
+        }
+        );
+    });
   }
 
   create(): void {
@@ -34,7 +45,7 @@ export class TipoEmpaqueFormComponent implements OnInit {
     this.tipoEmpaqueService.create(nuevo).subscribe(
       tipoEmpaque => {
         Swal.fire('Nuevo tipo de empaque', `El tipo de empaque ${this.tipoEmpaque.descripcion} ha sido creado correctamente`,
-        'success');
+          'success');
         this.modalTipoEmpaqueService.notificarCambio.emit(tipoEmpaque);
         this.modalTipoEmpaqueService.cerrarModal();
         this.router.navigate(['/tipoEmpaque']);

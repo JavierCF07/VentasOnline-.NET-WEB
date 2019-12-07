@@ -17,11 +17,11 @@ export class EmailClienteService {
   constructor(private httpClient: HttpClient, private router: Router) { }
 
   getClientes(): Observable<Clientes[]> {
-    return this.httpClient.get<Clientes[]>(`${this.urlEnpoint}/emailClientes`);
+    return this.httpClient.get<Clientes[]>(`${this.urlEnpoint}/clientes`);
   }
 
   getEmailClientes(): Observable<EmailCliente[]> {
-    return this.httpClient.get<EmailCliente[]>(`${this.urlEnpoint}/clientes`);
+    return this.httpClient.get<EmailCliente[]>(`${this.urlEnpoint}/emailClientes`);
   }
 
   create(emailCliente: EmailClienteCreacionDTO): Observable<EmailCliente> {

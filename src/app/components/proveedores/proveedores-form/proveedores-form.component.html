@@ -1,0 +1,71 @@
+<div class="abrir-Modal" *ngIf="modalProveedorService.modal">
+  <div class="modal" tabindex="-1" role="dialog" style="display: block;">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" *ngIf="!proveedor.codigoProveedor">{{titulo}}</h5>
+          <h5 class="modal-title" *ngIf="proveedor.codigoProveedor">Actualizar Proveedor</h5>
+          <button (click)="cerrarModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="card-body text-primary" style="background: burlywood;">
+              <form #proveedorForm="ngForm">
+                <div class="form-group row">
+                  <label for="nit" class="col-form-label col-sm-2">NIT</label>
+                  <div class="col-sm-6" *ngIf="proveedor">
+                    <input type="text" class="form-control" [(ngModel)]="proveedor.nit" name="nit" #nit="ngModel"
+                      placeholder="Ingrese el nit del proveedor">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="razonSocial" class="col-form-label col-sm-2">Razon Social</label>
+                  <div class="col-sm-6" *ngIf="proveedor">
+                    <input type="text" class="form-control" [(ngModel)]="proveedor.razonSocial" name="razonSocial"
+                      #razonSocial="ngModel" placeholder="Ingrese la razon social del proveedor">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="direccion" class="col-form-label col-sm-2">Direccion</label>
+                  <div class="col-sm-6" *ngIf="proveedor">
+                    <input type="text" class="form-control" [(ngModel)]="proveedor.direccion" name="direccion"
+                      #direccion="ngModel" placeholder="Ingrese la direccion del proveedor">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="paginaWeb" class="col-form-label col-sm-2">Pagina Web</label>
+                  <div class="col-sm-6" *ngIf="proveedor">
+                    <input type="text" class="form-control" [(ngModel)]="proveedor.paginaWeb" name="paginaWeb"
+                      #paginaWeb="ngModel" placeholder="Ingrese la pagina web del proveedor">
+                  </div>
+                </div>
+                <div class="form-grou row">
+                  <label for="contactoPrincipal" class="col-form-label col-sm-2">Contacto Principal</label>
+                  <div class="col-sm-6" *ngIf="proveedor">
+                    <input type="text" class="form-control" [(ngModel)]="proveedor.contactoPrincipal"
+                      name="contactoPrincipal" #contactoPrincipal="ngModel"
+                      placeholder="Ingrese el contacto principal del proveedor">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-form-label col-sm-8">
+                    <button *ngIf="!proveedor.codigoProveedor" class="btn btn-primary" role="button" (click)="create()">Crear</button>
+                  </div>
+                  <div class="col-sm-6">
+                    <button *ngIf="proveedor.codigoProveedor" class="btn btn-primary" role="button" (click)="update()">Actualizar</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button (click)="cerrarModal()" type="button" class="btn btn-secondary"
+            data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

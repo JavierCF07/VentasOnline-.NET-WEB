@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./email-cliente.component.css']
 })
 export class EmailClienteComponent implements OnInit {
-  emailClientes: any[];
+  emailClientes: EmailCliente[] = [];
   emailSeleccionado: EmailCliente;
   tipo: string;
 

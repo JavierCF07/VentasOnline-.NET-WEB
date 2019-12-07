@@ -1,23 +1,23 @@
 <ul *ngIf="paginas?.length > 0" class="pagination">
   <li class="page-item" *ngIf="paginador.number > 0">
-    <a class="page-link" [routerLink]="['/categoria/page', paginador.number-1]">&laquo;</a>
+    <a class="page-link" [routerLink]="['/proveedores/page', paginador.number-1]">&laquo;</a>
   </li>
   <li [ngClass]="paginador.first? 'disabled page-item': 'page-item'">
-    <a class="page-link" [routerLink]="['/categoria/page',0]">Primera</a>
+    <a class="page-link" [routerLink]="['/proveedores/page',0]">Primera</a>
   </li>
 
   <li *ngFor="let pagina of paginas"
   [ngClass]="pagina-1 == paginador.number? 'page-item active': 'page-item'">
   <span class="page-link" *ngIf="pagina-1 == paginador.number">{{pagina}}</span>
-  <a class="page-link" *ngIf="pagina -1 != paginador.number" [routerLink]="['/categoria/page', pagina -1]">
+  <a class="page-link" *ngIf="pagina -1 != paginador.number" [routerLink]="['/proveedores/page', pagina -1]">
     {{pagina}}</a>
   </li>
 
   <li [ngClass]="paginador?.last? 'disabled page-item': 'page-item'">
-    <a class="page-link" [routerLink]="['/categoria/page', paginador.totalPages -1]">Ultima</a>
+    <a class="page-link" [routerLink]="['/proveedores/page', paginador.totalPages -1]">Ultima</a>
   </li>
 
   <li class="page-item" *ngIf="paginador.number < paginador.totalPages-1">
-    <a class="page-link" [routerLink]="['/categoria/page', paginador.number]"></a>
+    <a class="page-link" [routerLink]="['/proveedores/page', paginador.number]">&raquo;</a>
   </li>
 </ul>

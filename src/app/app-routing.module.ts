@@ -10,6 +10,7 @@ import { AuthGuard } from './components/login/guards/authguard.guard';
 import { ProductosComponent } from './components/productos/productos.component';
 import { ProductoFormComponent } from './components/productos/producto-form/producto-form.component';
 import { EmailClienteComponent } from './components/email-cliente/email-cliente.component';
+import { ComprasComponent } from './components/compras/compras.component';
 
 
 const routes: Routes = [
@@ -18,10 +19,15 @@ const routes: Routes = [
   {path: 'categoria', component: CategoriasComponent, canActivate: [AuthGuard]},
   {path: 'categoria/page/:page', component: CategoriasComponent, canActivate: [AuthGuard]},
   {path: 'tipoEmpaque', component: TipoEmpaquesComponent, canActivate: [AuthGuard]},
+  {path: 'tipoEmpaque/page/:page', component: TipoEmpaquesComponent, canActivate: [AuthGuard]},
   {path: 'clientes', component: ClientesComponent, canActivate: [AuthGuard]},
   {path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard]},
-  {path: 'email', component: EmailClienteComponent, canActivate: [AuthGuard]},
+  {path: 'proveedores/page/:page', component: ProveedoresComponent, canActivate: [AuthGuard]},
+  {path: 'emailClientes', component: EmailClienteComponent, canActivate: [AuthGuard]},
+  {path: 'compras', component: ComprasComponent, canActivate: [AuthGuard]},
+  {path: 'compras/page/:page', component: ComprasComponent, canActivate: [AuthGuard]},
   {path: 'productos', component: ProductosComponent, canActivate: [AuthGuard]},
+  {path: 'productos/page/:page', component: ProductosComponent, canActivate: [AuthGuard]},
   {path: 'productoForm', component: ProductoFormComponent, canActivate: [AuthGuard]},
   {path: 'productoForm/:id', component: ProductoFormComponent, canActivate: [AuthGuard]},
   {path: '**', pathMatch: 'full', redirectTo: 'home'}

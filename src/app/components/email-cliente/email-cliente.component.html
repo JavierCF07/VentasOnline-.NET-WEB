@@ -7,7 +7,7 @@
   <div class="card-body text-primary">
     <h5 class="card-title">Listado de Email Clientes</h5>
     <div class="my-2 text-left"></div>
-    <button class="btn btn-primary" type="button" (click)="abrirModal()">
+    <button class="btn btn-primary" type="button" (click)="abrirModalEmail()">
       Crear Email Cliente
     </button>
     <div *ngIf="emailClientes?.length == 0" class="alert alert.info">
@@ -29,7 +29,7 @@
           <td>{{emailClientes.codigoEmail}}</td>
           <td>{{emailClientes.email}}</td>
           <td>{{emailClientes.nit}}</td>
-          <td><button (click)="abrirModal(emailCliente)" type="button" name="editar"
+          <td><button (click)="abrirModalEmail(emailCliente)" type="button" name="editar"
               class="btn btn-primary btn-sm">Editar</button></td>
           <td><button (click)="delete(emailCliente)" type="button" name="eliminar"
               class="btn btn-danger btn-sm">Eliminar</button></td>

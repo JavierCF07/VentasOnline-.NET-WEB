@@ -15,10 +15,16 @@ import { ProductoCreacionDTO } from '../productos/producto-creacion-dto';
 export class ProductoService {
   private urlEnpoint = 'https://localhost:44384/api/v1';
 
-  constructor(private httpClient: HttpClient, private router: Router, /*private categoriaService: CategoriaService*/) {}
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router, /*private categoriaService: CategoriaService*/) {}
 
   getProductos(): Observable<Producto[]> {
     return this.httpClient.get<Producto[]>(`${this.urlEnpoint}/producto`);
+  }
+
+  getProductoPage(page?: number): Observable<any> {
+    return this.httpClient.get(`${this.urlEnpoint}/producto/page/${page}`);
   }
 
   getCategorias(): Observable<Categoria[]> {

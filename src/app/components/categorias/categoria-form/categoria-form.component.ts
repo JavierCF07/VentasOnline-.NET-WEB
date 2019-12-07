@@ -48,7 +48,7 @@ export class CategoriaFormComponent implements OnInit {
           'success');
         this.modalCategoriaService.notificarCambio.emit(categoria);
         this.modalCategoriaService.cerrarModal();
-        this.router.navigate(['/categorias']);
+        this.router.navigate(['/categoria']);
       },
       error => {
         this.mensaje = 'The description field is required';

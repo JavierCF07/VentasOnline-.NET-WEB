@@ -1,11 +1,15 @@
+<app-proveedores-form [proveedor]="proveedorSeleccionado"></app-proveedores-form>
+
 <div class="card border-primary mb-3">
-    <div class="card-header">Proveedores</div>
+    <div class="card-header">Proveedores
+        <button class="boton" type="button" routerLink='home'>Regresar</button>
+    </div>
     <div class="card-body text-primary">
         <h5 class="card-title">Listado de proveedores</h5>
         <div class="my-2 text-left"></div>
-        <button class="btn btn-primary" type="button" routerLink="['/home']">
-        Crear Proveedores
-      </button>
+        <button class="btn btn-primary" type="button" (click)="abrirModal()">
+            Crear Proveedores
+        </button>
         <div *ngIf="proveedores?.length == 0" class="alert alert.info">
             No hay registros en la base de datos
         </div>
@@ -18,6 +22,8 @@
                     <th>Dirección</th>
                     <th>Pagina Web</th>
                     <th>Contacto Principal</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,8 +33,13 @@
                     <td>{{Proveedores.direccion}}</td>
                     <td>{{Proveedores.paginaWeb}}</td>
                     <td>{{Proveedores.contactoPrincipal}}</td>
+                    <td><button (click)="abrirModal(proveedor)" type="button" name="editar"
+                            class="btn btn-primary btn-sm">Editar</button></td>
+                    <td><button (click)="delete(proveedor)" type="button" name="eliminar"
+                            class="btn btn-danget btn-sm">Eliminar</button></td>
                 </tr>
             </tbody>
         </table>
+        <app-proveedores-paginator *ngIf="paginador" [paginador]='paginador'></app-proveedores-paginator>
     </div>
 </div>

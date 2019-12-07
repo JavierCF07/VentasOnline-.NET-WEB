@@ -8,8 +8,8 @@
         <h5 class="card-title">Listado de categorias</h5>
         <div class="my-2 text-left"></div>
         <button class="btn btn-primary" type="button" (click)="abrirModal()">
-      Crear Categoria
-    </button>
+            Crear Categoria
+        </button>
         <div *ngIf="categorias?.length == 0" class="alert alert.info">
             No hay registros en la base de datos
         </div>
@@ -27,8 +27,10 @@
                 <tr *ngFor="let categoria of categorias">
                     <td>{{categoria.codigoCategoria}}</td>
                     <td>{{categoria.descripcion}}</td>
-                    <td><button (click)="abrirModal(categoria)" type="button" name="editar" class="btn btn-primary btn-sm">Editar</button></td>
-                    <td><button (click)="delete(categoria)" type="button" name="eliminar" class="btn btn-danger btn-sm">Eliminar</button></td>
+                    <td><button (click)="abrirModal(categoria)" type="button" name="editar"
+                            class="btn btn-primary btn-sm">Editar</button></td>
+                    <td><button (click)="delete(categoria)" type="button" name="eliminar"
+                            class="btn btn-danger btn-sm">Eliminar</button></td>
                 </tr>
             </tbody>
         </table>

@@ -16,17 +16,18 @@
                 <div class="form-group row">
                   <label for="descripcion" class="col-form-label col-sm-2">Descripcion</label>
                   <div class="col-sm-6" *ngIf="tipoEmpaque">
-                    <input type="text" class="form-control" [(ngModel)]="tipoEmpaque.descripcion" 
-                    name="descripcion" #descripcion="ngModel"
-                    placeholder="Ingrese la descripcion del tipo de empaque">
+                    <input type="text" class="form-control" [(ngModel)]="tipoEmpaque.descripcion" name="descripcion"
+                      #descripcion="ngModel" placeholder="Ingrese la descripcion del tipo de empaque">
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-form-label col-sm-8">
-                    <button *ngIf="!tipoEmpaque.codigoEmpaque" class="btn btn-primary" role="button" (click)="create()">Crear</button>
+                    <button *ngIf="!tipoEmpaque.codigoEmpaque" class="btn btn-primary" role="button"
+                      (click)="create()">Crear</button>
                   </div>
                   <div class="col-sm-6">
-                    <button *ngIf="tipoEmpaque.codigoEmpaque" class="btn btn-primary" role="button"(click)="update()">Actualizar</button>
+                    <button *ngIf="tipoEmpaque.codigoEmpaque" class="btn btn-primary" role="button"
+                      (click)="update()">Actualizar</button>
                   </div>
                 </div>
               </form>
@@ -34,8 +35,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button (click)="cerrarModal()" type="button" class="btn btn-secondary"
-            data-dismiss="modal">Close</button>
+          <button (click)="cerrarModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

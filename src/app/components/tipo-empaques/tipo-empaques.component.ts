@@ -4,6 +4,7 @@ import { TipoEmpaque } from './tipo-empaque';
 import { ModalProductoService } from '../services/modal/modal-producto.service';
 import Swal from 'sweetalert2';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tipo-empaques',
@@ -11,24 +12,36 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./tipo-empaques.component.css']
 })
 export class TipoEmpaquesComponent implements OnInit {
-  tipoEmpaque: any[];
+  tipoEmpaque: TipoEmpaque[] = [];
   tipoEmpaqueSeleccionado: TipoEmpaque;
   tipo: string;
+  paginador: any;
 
-  constructor(private tipoEmpaqueService: TipoEmpaqueService, private ModalTipoEmpaqueService: ModalProductoService) {
-    this.tipoEmpaqueService.getTipoEmpaque().subscribe((data: any) => {
-      this.tipoEmpaque = data;
-    });
-  }
+  constructor(
+    private tipoEmpaqueService: TipoEmpaqueService,
+    private ModalTipoEmpaqueService: ModalProductoService,
+    private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
+    this.activatedRoute.paramMap.subscribe(params => {
+      let page: number = + params.get('page');
+      if (!page) {
+        page = 0;
+      }
+      this.tipoEmpaqueService.getTipoEmpaquePage(page)
+      .subscribe((response => {
+        this.tipoEmpaque = response.content as TipoEmpaque[];
+        this.paginador = response;
+      }));
+    });
+
     this.ModalTipoEmpaqueService.notificarCambio.subscribe(tipoEmpaque => {
       if (this.tipo === 'new') {
         this.tipoEmpaque.push(tipoEmpaque);
       } else if (this.tipo === 'update') {
         this.tipoEmpaque = this.tipoEmpaque.map(tipoEmpaqueOriginal => {
           if (tipoEmpaque.codigoEmpaque === tipoEmpaqueOriginal.codigoEmpaque) {
-            tipoEmpaqueOriginal = TipoEmpaque;
+            tipoEmpaqueOriginal = tipoEmpaque;
           }
           return tipoEmpaqueOriginal;
         });

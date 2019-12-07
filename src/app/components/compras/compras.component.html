@@ -1,0 +1,45 @@
+<app-compras-form [compra]="compraSeleccionada"></app-compras-form>
+
+<div class="card border-primary mb-3">
+  <div class="card-header">Compras
+    <button class="boton" type="button" routerLink='home'>Regresar</button>
+  </div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de compras</h5>
+    <div class="my-2 text-left"></div>
+    <button class="btn btn-primary" type="button" (click)="abrirModal()">
+      Crear Compra
+    </button>
+    <div *ngIf="compras?.length == 0" class="alert alert.info">
+      No hay registros en la base de datos
+    </div>
+
+    <table class="table table-bordered table-striped" style="margin-top: 50px;">
+      <thead>
+        <tr>
+          <th>Codigo de la compra</th>
+          <th>Numero del documento</th>
+          <th>Fecha</th>
+          <th>Total</th>
+          <th>Proveedor</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let compra of compras">
+          <td>{{compra.idCompra}}</td>
+          <td>{{compra.numeroDocumento}}</td>
+          <td>{{compra.fecha}}</td>
+          <td>{{compra.total}}</td>
+          <td>{{compra.proveedores.razonSocial}}</td>
+          <td><button (click)="abrirModal(compra)" type="button" name="editar"
+              class="btn btn-primary btn-sm">Editar</button></td>
+          <td><button (click)="delete(compra)" type="button" name="eliminar"
+              class="btn btn-danger btn-sm">Eliminar</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <app-compras-paginator *ngIf="paginador" [paginador]='paginador'></app-compras-paginator> -->
+  </div>
+</div>

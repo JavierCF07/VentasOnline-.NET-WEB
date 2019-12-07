@@ -21,6 +21,10 @@ export class TipoEmpaqueService {
     return this.httpClient.get<TipoEmpaque[]>(`${this.urlEnpoint}/${url}`/*{headers}*/);
   }
 
+  public getTipoEmpaquePage(page?: number): Observable<any> {
+    return this.httpClient.get(`${this.urlEnpoint}/tipoEmpaque/page/${page}`);
+  }
+
   getTipoEmpaques(): Observable<TipoEmpaque[]> {
     return this.httpClient.get<TipoEmpaque[]>(`${this.urlEnpoint}/tipoEmpaque`);
   }
